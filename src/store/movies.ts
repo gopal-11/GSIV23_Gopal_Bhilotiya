@@ -1,65 +1,116 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction, createSelector,current } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction,
+  createSelector,
+  current,
+} from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-interface Movie{
-  id:number;
-  vote_average:number;
-  title:string;
-  overview:string;
-  release_date:string;
-  poster_path:string;
+interface Movie {
+  id: number;
+  vote_average: number;
+  title: string;
+  overview: string;
+  release_date: string;
+  poster_path: string;
+  runtime: number;
 }
 interface Movies {
- movies:Array<Movie>;
- selectedMovie:Movie; 
+  movies: Array<Movie>;
+  searchedMovies: Array<Movie>;
+  selectedMovie: Movie;
+  searchQuery: string;
+  currentMoviePage: number;
+  currentSearchPage: number;
 }
 
-const movieInitialState:Movie={
-  id:-1,
-  vote_average:0,
-  title:"",
-  overview:"",
-  release_date:"",
-  poster_path:""}
+const movieInitialState: Movie = {
+  id: -1,
+  vote_average: 0,
+  title: '',
+  overview: '',
+  release_date: '',
+  poster_path: '',
+  runtime: 0,
+};
 
 const initialState: Movies = {
-  movies:[],
-  selectedMovie:movieInitialState
+  movies: [],
+  searchedMovies: [],
+  selectedMovie: movieInitialState,
+  searchQuery: '',
+  currentMoviePage: 1,
+  currentSearchPage: 1,
 };
 
 export const slice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    load:(state, action: PayloadAction<any>)=>{
+    load: (state, action: PayloadAction<any>) => {
       // do nothing
     },
-    searchMovies:(state, action: PayloadAction<any>)=>{
-      // do nothing
+    searchMovies: (state, action: PayloadAction<any>) => {
+      state.searchQuery = action.payload.query;
+      if (action.payload.currentSearchPage === 1) state.searchedMovies = [];
     },
     setMovies: (state, action: PayloadAction<any>) => {
-      state.movies = [...current(state.movies),...action.payload];
+      state.movies = [...current(state.movies), ...action.payload];
     },
-    setSearchedMovies:(state, action: PayloadAction<any>) => {
-      state.movies = [...current(state.movies),...action.payload];
+    setSearchedMovies: (state, action: PayloadAction<any>) => {
+      console.log([...current(state.searchedMovies), ...action.payload]);
+      state.searchedMovies = [
+        ...current(state.searchedMovies),
+        ...action.payload,
+      ];
+    },
+    getSelectedMovieDetail: (state, action: PayloadAction<any>) => {
+      // do nothing
     },
     setSelectedMovie: (state, action: PayloadAction<any>) => {
+      console.log(action.payload);
       state.selectedMovie = action.payload;
     },
-    clearSelectedMovie:(state) => {
+    clearSelectedMovie: (state) => {
       state.selectedMovie = movieInitialState;
+    },
+    setMoviesPage: (state, action: PayloadAction<any>) => {
+      console.log('movie page', action.payload.currentMoviePage);
+      state.currentMoviePage = action.payload.currentMoviePage;
+    },
+    setSearchPage: (state, action: PayloadAction<any>) => {
+      state.currentSearchPage = action.payload.currentSearchPage;
     },
   },
 });
 
 export const { reducer, actions } = slice;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectMoviesStore = (state: RootState) => state.movies;
-export const selectMovies = createSelector(selectMoviesStore, (state) => state.movies);
-export const getSelectedMovie = createSelector(selectMoviesStore, (state) => state.selectedMovie);
+export const selectMovies = createSelector(
+  selectMoviesStore,
+  (state) => state.movies
+);
+export const getSelectedMovie = createSelector(
+  selectMoviesStore,
+  (state) => state.selectedMovie
+);
+export const getSearchedMovies = createSelector(
+  selectMoviesStore,
+  (state) => state.searchedMovies
+);
+export const getSearchQuery = createSelector(
+  selectMoviesStore,
+  (state) => state.searchQuery
+);
+export const getSearchPage = createSelector(
+  selectMoviesStore,
+  (state) => state.currentSearchPage
+);
+export const getMoviesPage = createSelector(
+  selectMoviesStore,
+  (state) => state.currentMoviePage
+);

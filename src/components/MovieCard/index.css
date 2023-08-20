@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  box-shadow: 0 3px 10px 0 black;
+  border-radius: 4px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.card_image {
+  height: 200px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.card_detail_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.rating {
+  color: #fbbc04;
+  font-weight: 700;
+  font-size: 16px;
+}
+.description {
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding: 0px 10px;
+  opacity: 0.8;
+}
+
+.movie_title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.movie_duration {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 4px 0;
+}
