@@ -64,6 +64,7 @@ export const slice = createSlice({
       ];
     },
     getSelectedMovieDetail: (state, action: PayloadAction<any>) => {
+      state.selectedMovie = movieInitialState;
       // do nothing
     },
     setSelectedMovie: (state, action: PayloadAction<any>) => {
