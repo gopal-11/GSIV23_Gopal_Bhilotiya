@@ -44,4 +44,7 @@ d. Optional: Any feedback about how we may improve this challenge.
 1. It would be better to provide the api endpoints in the task pdf doc. I find difficulty in find some of the data as mentioned like cast, actors, director, in the movie detail api mentioned below so I kept them as static only.
    `https://api.themoviedb.org/3/movie/${data.id}?api_key=${API_KEY}`
 
-2. The UI sketch would be better if provided with the better ui in terms of colors
+2. The get movie list api has a param for sorting but it was not working as expected so i was confused about sorting by latest wether we have to get sorted data using api or need to implement our own logic to sort data after fetching from the api. I have passed sort_by parameter to api for now but not sure it is right way to achieve it.
+   `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&sort_by=primary_release_date.desc&query=${data.query}&include_adult=false&language=en-US&page=${data.currentSearchPage}`
+
+3. The UI sketch would be better if provided with the better ui in terms of colors
