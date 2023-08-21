@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   getMoviesSearch,
