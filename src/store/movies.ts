@@ -61,7 +61,6 @@ export const slice = createSlice({
       state.movies = [...current(state.movies), ...action.payload];
     },
     setSearchedMovies: (state, action: PayloadAction<any>) => {
-      console.log([...current(state.searchedMovies), ...action.payload]);
       state.searchedMovies = [
         ...current(state.searchedMovies),
         ...action.payload,
@@ -71,14 +70,12 @@ export const slice = createSlice({
       // do nothing
     },
     setSelectedMovie: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.selectedMovie = action.payload;
     },
     clearSelectedMovie: (state) => {
       state.selectedMovie = movieInitialState;
     },
     setMoviesPage: (state, action: PayloadAction<any>) => {
-      console.log('movie page', action.payload.currentMoviePage);
       state.currentMoviePage = action.payload.currentMoviePage;
     },
     setSearchPage: (state, action: PayloadAction<any>) => {

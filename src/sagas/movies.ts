@@ -11,21 +11,24 @@ function* getMoviesSaga(action: any): Generator {
   try {
     const res: any = yield call(getMoviesService, action.payload);
     yield put(actions.setMovies(res.data.results));
-  } catch (err: any) {}
+  } catch (err: any) {
+    console.log(err);
+  }
 }
 
 function* getSearchMoviesSaga(action: any): Generator {
   try {
     const res: any = yield call(getMoviesSearch, action.payload);
     yield put(actions.setSearchedMovies(res.data.results));
-  } catch (err: any) {}
+  } catch (err: any) {
+    console.log(err);
+  }
 }
 
 function* getSelectedMovieDetailSaga(action: any): Generator {
   try {
-    console.log(action.payload);
     const res: any = yield call(getMovieDetailService, action.payload);
-    console.log(res.data);
+
     yield put(actions.setSelectedMovie(res.data));
   } catch (err: any) {
     console.log(err);
