@@ -56,16 +56,7 @@ const Home: FC = () => {
 
   return (
     <div>
-      <div
-        // style={{
-        //   display: 'flex',
-        //   flexWrap: 'wrap',
-        //   padding: '30px',
-        //   gap: '25px',
-        //   justifyContent: 'space-evenly',
-        // }}
-        className="card_container"
-      >
+      <div className="card_container">
         {(searchQuery === '' ? moviesStore : searchedMovies)?.map(
           (movie, index) => (
             <MovieCard movie={movie} key={index} />

@@ -26,5 +26,4 @@ export const store = configureStore({
 });
 export type RootState = ReturnType<typeof store.getState>;
 
-// store.subscribe(() => saveToSessionStorage(store.getState()));
 sagaMiddleware.run(rootSagas);
